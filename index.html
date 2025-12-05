@@ -1,19 +1,540 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Personal TikTok Automation</title>
+  <meta charset="utf-8" />
+  <title>FlowClips – Creator Video Publishing Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #070b19;
+      --card-bg: #0b1022;
+      --card-border: #20263b;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.15);
+      --accent-2: #22c55e;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --danger: #f97373;
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --shadow-subtle: 0 10px 25px rgba(15, 23, 42, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, var(--bg) 38%, #020617 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 20px 40px;
+    }
+
+    /* Header */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(24px);
+      background: linear-gradient(to bottom, rgba(5, 8, 22, 0.94), rgba(5, 8, 22, 0.7));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 30%;
+      background: conic-gradient(from 210deg, #22c55e, #4f46e5, #06b6d4, #22c55e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .logo-inner {
+      width: 18px;
+      height: 18px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 0, #e5e7eb 0, #0b1022 55%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(15, 23, 42, 0.85);
+      color: #e5e7eb;
+      transform: translateY(-0.5px);
+    }
+
+    .pill-badge {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 4px 10px;
+      font-size: 11px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+    }
+
+    .indicator-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.2);
+    }
+
+    /* Layout */
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 30px;
+      padding-top: 40px;
+    }
+
+    @media (max-width: 840px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .hero-heading {
+      font-size: clamp(28px, 4vw, 34px);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, #a855f7, #4f46e5, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 460px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      border-radius: var(--radius-pill);
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-subtle);
+      cursor: default;
+    }
+
+    .btn-primary span:nth-child(2) {
+      font-size: 16px;
+      opacity: 0.7;
+    }
+
+    .btn-ghost {
+      border-radius: var(--radius-pill);
+      padding: 9px 15px;
+      font-size: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+    }
+
+    .meta-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    /* Right card */
+
+    .hero-card {
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.1), transparent 60%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .badge-api {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .badge-pill-sm {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .code-block {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-lg);
+      padding: 12px 12px 10px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      color: #e5e7eb;
+      overflow-x: auto;
+    }
+
+    .code-line {
+      white-space: pre;
+    }
+
+    .code-muted {
+      color: #6b7280;
+    }
+
+    .code-key {
+      color: #a5b4fc;
+    }
+
+    .code-val {
+      color: #f97316;
+    }
+
+    .code-str {
+      color: #34d399;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .scope-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.96);
+      color: #cbd5f5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .scope-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4f46e5;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .status-pill {
+      border-radius: 999px;
+      padding: 4px 9px;
+      background: rgba(22, 163, 74, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .footer {
+      padding-top: 40px;
+      padding-bottom: 10px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
+      margin-top: 30px;
+    }
+
+    .footer a {
+      color: #a5b4fc;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
 </head>
 <body>
-  <h1>Personal TikTok Automation Information</h1>
+<div class="page">
+  <header>
+    <div class="shell">
+      <div class="nav">
+        <div class="nav-left">
+          <div class="logo-mark">
+            <div class="logo-inner">FC</div>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">FlowClips</span>
+            <span class="brand-tagline">Creator Video Publishing</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <span class="pill-badge">
+            <span class="indicator-dot"></span>
+            Sandbox integration with TikTok for Developers
+          </span>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <h2>Terms of Service</h2>
-  <p>This project is a private personal-use automation tool designed to upload videos to my own TikTok account through the TikTok API. No external users have access to this tool. No data is collected, stored, shared, or sold to any third party. This system exists solely for personal internal use by the owner of this TikTok Developer account.</p>
+  <main>
+    <div class="shell">
+      <div class="hero-grid">
+        <!-- Left -->
+        <section>
+          <h1 class="hero-heading">
+            A focused <span class="hero-highlight">creator workflow</span> for publishing to TikTok.
+          </h1>
+          <p class="hero-sub">
+            FlowClips connects a creator’s editing pipeline to TikTok’s Content Posting API. 
+            Authenticate once, then programmatically upload or publish finished clips using a safe, 
+            OAuth-based workflow.
+          </p>
 
-  <h2>Privacy Policy</h2>
-  <p>This tool is used only by the owner of this TikTok Developer account. No personal data is collected from any external users. No cookies, analytics, tracking technologies, or third-party data processors are used. All data remains on the owner’s local system and is used exclusively for uploading content to the owner's TikTok account through the TikTok API. This project does not serve external users and does not interact with the public in any capacity.</p>
+          <div class="hero-cta-row">
+            <button class="btn-primary" type="button">
+              <span>Connected to TikTok Sandbox</span>
+              <span>●</span>
+            </button>
+            <div class="btn-ghost">
+              <span>Secure OAuth · Creator-first · Content Posting API</span>
+            </div>
+          </div>
 
-  <h2>Web/Desktop Information</h2>
-  <p>This page exists solely to fulfill TikTok Developer Portal requirements for application setup. It supports a private workflow that uploads videos to my personal TikTok account. There are no public-facing features, services, or interactive components.</p>
+          <div class="hero-meta">
+            <span class="meta-pill">
+              <span class="meta-dot"></span>
+              Uses Login Kit + Content Posting API
+            </span>
+            <span>Scopes: <strong>user.info.basic</strong>, <strong>video.upload</strong>, <strong>video.publish</strong></span>
+          </div>
+        </section>
+
+        <!-- Right card -->
+        <section>
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div>
+                <div class="badge-api">
+                  <span>🔐 TikTok OAuth</span>
+                  <span style="font-size:10px; opacity:0.7;">Sandbox</span>
+                </div>
+              </div>
+              <div class="badge-pill-sm">
+                Internal creator tool demo
+              </div>
+            </div>
+
+            <div class="code-block">
+              <div class="code-line code-muted">// Exchange authorization code for an access token</div>
+              <div class="code-line"><span class="code-key">POST</span> <span class="code-val">/v2/oauth/token</span></div>
+              <div class="code-line"><span class="code-key">client_key</span>: <span class="code-str">"&lt;app_client_key&gt;"</span></div>
+              <div class="code-line"><span class="code-key">grant_type</span>: <span class="code-str">"authorization_code"</span></div>
+              <div class="code-line"><span class="code-key">code</span>: <span class="code-str">"&lt;redirect_code&gt;"</span></div>
+              <div class="code-line"><span class="code-key">redirect_uri</span>: <span class="code-str">"https://app.flowclips.dev/webhook/tiktok-auth"</span></div>
+              <br />
+              <div class="code-line code-muted">// Call user.info to confirm connected creator account</div>
+              <div class="code-line"><span class="code-key">GET</span> <span class="code-val">/v2/user/info?fields=open_id,display_name</span></div>
+              <div class="code-line"><span class="code-key">Authorization</span>: <span class="code-str">"Bearer &lt;access_token&gt;"</span></div>
+            </div>
+
+            <div>
+              <div style="font-size:11px; margin-top:4px; color:var(--muted);">
+                Active TikTok scopes:
+              </div>
+              <div class="pill-row">
+                <span class="scope-pill"><span class="scope-dot"></span>user.info.basic</span>
+                <span class="scope-pill"><span class="scope-dot"></span>video.upload</span>
+                <span class="scope-pill"><span class="scope-dot"></span>video.publish</span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <span>Designed for creators who automate their posting pipeline.</span>
+              <span class="status-pill">
+                <span>●</span>
+                OAuth status: Ready
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <span>© <span id="year"></span> FlowClips. All rights reserved.</span>
+        <span>
+          <a href="terms.html">Terms of Service</a> ·
+          <a href="privacy.html">Privacy Policy</a>
+        </span>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
