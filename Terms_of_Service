@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Terms of Service – FlowClips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #020617;
+      --card-bg: #020617;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.16);
+      --border: rgba(148, 163, 184, 0.35);
+      --radius-xl: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.9);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617 52%, #000000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+      background: rgba(2, 6, 23, 0.95);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 18px 18px 32px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #22c55e, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.25);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.18), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(15, 118, 110, 0.18), transparent 60%),
+                  linear-gradient(to bottom right, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 22px 22px 26px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 3vw, 26px);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      max-width: 580px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+    }
+
+    .sections {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #e5e7eb;
+    }
+
+    .section {
+      padding: 12px 12px 10px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .section h2 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .section h3 {
+      margin: 10px 0 4px;
+      font-size: 13px;
+    }
+
+    .section p {
+      margin: 0 0 8px;
+    }
+
+    .section ul {
+      margin: 0 0 8px 18px;
+      padding: 0;
+    }
+
+    .section li {
+      margin-bottom: 4px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer {
+      font-size: 11px;
+      color: var(--muted);
+      padding-top: 22px;
+      padding-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
+      margin-top: 28px;
+    }
+
+    footer a {
+      color: #a5b4fc;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        padding-inline: 16px;
+      }
+      .card {
+        padding-inline: 16px;
+      }
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="shell">
+      <div class="nav">
+        <div class="nav-left">
+          <div class="logo">FC</div>
+          <div class="brand">
+            <span class="brand-name">FlowClips</span>
+            <span class="brand-sub">Creator Video Publishing</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <article class="card">
+        <div class="eyebrow">Legal</div>
+        <h1>Terms of Service</h1>
+        <p class="subtitle">
+          These Terms govern the use of FlowClips, a tool that helps creators authenticate with TikTok 
+          and publish video content using TikTok for Developers.
+        </p>
+
+        <div class="badge-row">
+          <span class="pill">Applies to: FlowClips web app</span>
+          <span class="pill">Last updated: <span id="updated"></span></span>
+        </div>
+
+        <div class="sections">
+          <section class="section">
+            <h2>1. Overview</h2>
+            <p>
+              FlowClips (“the Service”) provides a workflow that allows creators to authenticate with TikTok 
+              through OAuth and to upload or publish their own videos using TikTok’s Content Posting API. 
+              By accessing or using the Service, you agree to these Terms of Service.
+            </p>
+            <p class="muted">
+              TikTok is a separate platform with its own terms and policies, which apply in addition to these Terms.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>2. Eligibility & Account Responsibility</h2>
+            <p>
+              You must have a valid TikTok account and be authorized to manage that account. 
+              You are solely responsible for:
+            </p>
+            <ul>
+              <li>The security of your TikTok credentials and OAuth authorization.</li>
+              <li>Any content you upload or publish through the Service.</li>
+              <li>Ensuring your content complies with TikTok’s Community Guidelines and Terms of Service.</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2>3. Use of the Service</h2>
+            <h3>3.1 Permitted Use</h3>
+            <p>
+              The Service is designed to help creators streamline their own posting workflow. You may use it to:
+            </p>
+            <ul>
+              <li>Authenticate your TikTok account via OAuth.</li>
+              <li>Upload and publish videos you own or are authorized to use.</li>
+              <li>Automate parts of your creator workflow in compliance with TikTok policies.</li>
+            </ul>
+
+            <h3>3.2 Prohibited Use</h3>
+            <p>You agree not to:</p>
+            <ul>
+              <li>Use the Service to upload content that is illegal, infringing, or violates TikTok’s rules.</li>
+              <li>Misrepresent your identity or mislead others about your relationship to TikTok.</li>
+              <li>Attempt to interfere with or circumvent TikTok’s security or rate limits.</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2>4. Data & API Access</h2>
+            <p>
+              The Service uses TikTok’s OAuth flow to obtain access tokens that authorize actions such as retrieving 
+              basic account information and uploading content. These tokens are used solely to perform the actions 
+              you explicitly trigger within your workflow.
+            </p>
+            <p>
+              The Service does not sell or rent your data to third parties. TikTok may independently collect and 
+              process data in accordance with its own policies.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>5. Intellectual Property</h2>
+            <p>
+              You retain all rights to the videos and other content you upload through the Service. You are responsible 
+              for ensuring you have all necessary rights and permissions.
+            </p>
+            <p>
+              The FlowClips name, logo, and interface elements are provided for your use of the Service and may not be 
+              copied or redistributed without permission.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>6. Disclaimers & Limitation of Liability</h2>
+            <p>
+              The Service is provided “as is” without warranties of any kind, whether express or implied. 
+              Functionality depends in part on TikTok’s APIs, which may change or experience downtime.
+            </p>
+            <p>
+              To the maximum extent permitted by law, the Service is not liable for any indirect, incidental, or 
+              consequential damages arising from your use of the Service, including loss of content, followers, or revenue.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>7. Changes to the Service or Terms</h2>
+            <p>
+              The Service may evolve over time. Features may be added, changed, or removed to remain compatible with 
+              TikTok’s platform and policies. These Terms may also be updated periodically. If you continue to use the 
+              Service after changes take effect, you accept the updated Terms.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>8. Contact</h2>
+            <p>
+              If you have questions about these Terms or how the Service interacts with TikTok for Developers, 
+              please contact the app owner using the contact information provided in the TikTok Developer portal.
+            </p>
+          </section>
+        </div>
+      </article>
+
+      <footer>
+        <span>© <span id="year"></span> FlowClips. All rights reserved.</span>
+        <span>
+          <a href="index.html">Home</a> ·
+          <a href="privacy.html">Privacy Policy</a>
+        </span>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+  const now = new Date();
+  document.getElementById('year').textContent = now.getFullYear();
+  document.getElementById('updated').textContent = now.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+</script>
+</body>
+</html>
